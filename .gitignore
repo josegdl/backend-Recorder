@@ -9,3 +9,16 @@ target/
 *.log
 *.mkv
 *.mp4
+recordings/
+/ffmpeg.exe
+/yt-dlp.exe
+AGENTS.md
+MEMORY.md
+.opencode/commands
+feature.md
+.opencode/node_modules
+node_modules
+package.json
+package-lock.json
+bun.lock
+.gitignore
