@@ -44,7 +44,8 @@ public class InMemoryChannelRepositoryAdapter implements ChannelRepositoryPort {
             idGenerator.accumulateAndGet(id, Math::max);
         }
         Channel stored = new Channel(id, channel.name(), channel.sourceUrl(),
-                channel.protocol(), channel.enabled(), channel.format());
+                channel.protocol(), channel.enabled(), channel.format(),
+                channel.exclusionList1(), channel.exclusionList2(), channel.allowedWindows(), channel.blockDurationMinutes());
         channels.put(id, stored);
         return stored;
     }

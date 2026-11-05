@@ -17,7 +17,7 @@ class FfmpegCommandFactoryTest {
     private final FfmpegCommandFactory factory = new FfmpegCommandFactory("ffmpeg");
 
     private Channel channel(StreamProtocol protocol) {
-        return new Channel(1L, "Canal", "http://example.test/stream", protocol, true, com.recorder.backend.domain.model.OutputFormat.MKV);
+        return new Channel(1L, "Canal", "http://example.test/stream", protocol, true, com.recorder.backend.domain.model.OutputFormat.MKV, java.util.List.of(), java.util.List.of(), java.util.List.of(), 60);
     }
 
     @Test
@@ -28,6 +28,9 @@ class FfmpegCommandFactoryTest {
 
         assertEquals("ffmpeg", command.get(0));
         assertTrue(command.contains("-reconnect"), "HLS debe habilitar reconexión HTTP");
+        assertTrue(command.contains("-threads"));
+        assertTrue(command.contains("-drop_pkts_on_overflow"));
+        assertTrue(command.contains("-use_wallclock_as_timestamps"));
         assertTrue(indexOf(command, "-c") + 1 == indexOf(command, "copy"));
         assertTrue(command.contains("matroska"));
         assertTrue(command.get(command.size() - 1).endsWith("salida.mkv"));

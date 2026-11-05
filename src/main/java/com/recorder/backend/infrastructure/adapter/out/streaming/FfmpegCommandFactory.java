@@ -74,6 +74,12 @@ public class FfmpegCommandFactory {
     private void addFormatOptions(List<String> command, OutputFormat format) {
         switch (format) {
             case MKV -> {
+                command.add("-threads");
+                command.add("1");
+                command.add("-drop_pkts_on_overflow");
+                command.add("1");
+                command.add("-use_wallclock_as_timestamps");
+                command.add("1");
                 command.add("-c");
                 command.add("copy");
                 command.add("-f");

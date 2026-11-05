@@ -10,11 +10,12 @@ public record ChannelResponse(
         String sourceUrl,
         StreamProtocol protocol,
         boolean enabled,
-        OutputFormat format
+        OutputFormat format,
+        int blockDurationMinutes
 ) {
 
     public static ChannelResponse from(Channel channel) {
         return new ChannelResponse(channel.id(), channel.name(), channel.sourceUrl(),
-                channel.protocol(), channel.enabled(), channel.format());
+                channel.protocol(), channel.enabled(), channel.format(), channel.blockDurationMinutes());
     }
 }

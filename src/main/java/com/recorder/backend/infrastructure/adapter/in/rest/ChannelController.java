@@ -1,6 +1,6 @@
 package com.recorder.backend.infrastructure.adapter.in.rest;
 
-import com.recorder.backend.domain.port.in.RecordingServicePort;
+import com.recorder.backend.domain.port.in.SchedulerServicePort;
 import com.recorder.backend.domain.port.out.ChannelRepositoryPort;
 import com.recorder.backend.infrastructure.adapter.in.rest.dto.ChannelResponse;
 import java.util.List;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChannelController {
 
     private final ChannelRepositoryPort channelRepository;
-    private final RecordingServicePort recordingService;
+    private final SchedulerServicePort schedulerService;
 
     public ChannelController(ChannelRepositoryPort channelRepository,
-                             RecordingServicePort recordingService) {
+                             SchedulerServicePort schedulerService) {
         this.channelRepository = channelRepository;
-        this.recordingService = recordingService;
+        this.schedulerService = schedulerService;
     }
 
     @GetMapping
@@ -35,12 +35,12 @@ public class ChannelController {
     @PostMapping("/{id}/start")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void start(@PathVariable Long id) {
-        recordingService.startChannelRecording(id);
+        schedulerService.startChannel(id);
     }
 
     @PostMapping("/{id}/stop")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void stop(@PathVariable Long id) {
-        recordingService.stopChannelRecording(id);
+        schedulerService.stopChannel(id);
     }
 }
